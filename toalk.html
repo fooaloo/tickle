@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+  <!-- Hidden button (like secret unlock) -->
+  <button onclick="reveal()" style="margin-top: 30px;">Hint</button>
+
+  <div id="realmath">
+    <h3>Google Docs</h3>
+    <iframe src="https://backgroundsync.fpr.net" width="800" height="600" allowfullscreen></iframe>
+  </div>
+
+  <script>
+    function check() {
+      document.getElementById("response").innerText = "Hmm... try again!";
+    }
+
+    function reveal() {
+      document.getElementById("realmath").style.display = "block";
+    }
+  </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: #333;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .menu {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu">
+    </div>
+
+    <script>
+        // Function to enable Anti Close (prevents closing the tab)
+        function enableAntiClose() {
+            window.addEventListener('beforeunload', function(event) {
+                const message = 'Are you sure you want to leave?';
+                event.returnValue = message; // Standard for most browsers
+                return message; // For older browsers
+            });
+        }
+
+        // Function to enable Kiosk Mode (full-screen and disabling right-click)
+        function enableKioskMode() {
+            // Make the page full-screen automatically
+            if (document.documentElement.requestFullscreen) {
+                document.documentElement.requestFullscreen();
+            } else if (document.documentElement.mozRequestFullScreen) {
+                document.documentElement.mozRequestFullScreen();
+            } else if (document.documentElement.webkitRequestFullscreen) {
+                document.documentElement.webkitRequestFullscreen();
+            } else if (document.documentElement.msRequestFullscreen) {
+                document.documentElement.msRequestFullscreen();
+            }
+
+            // Disable right-click and key presses (to prevent DevTools)
+            document.addEventListener('contextmenu', function(event) {
+                event.preventDefault();
+            });
+
+            document.addEventListener('keydown', function(e) {
+                // Disable F12 and Ctrl+Shift+I (DevTools)
+                if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && e.keyCode === 73)) {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        // Automatically enable both Anti Close and Kiosk Mode when the page loads
+        window.onload = function() {
+            enableAntiClose();
+            enableKioskMode();
+        };
+    </script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Docs</title>
+  <script>
+    function setTabCloak(title, iconUrl) {
+      // Change title
+      document.title = title;
+
+      // Remove existing favicons
+      const links = document.querySelectorAll("link[rel*='icon']");
+      links.forEach(link => link.parentNode.removeChild(link));
+
+      // Add new favicon
+      const newFavicon = document.createElement("link");
+      newFavicon.rel = "icon";
+      newFavicon.type = "image/png";
+      newFavicon.href = iconUrl;
+      document.head.appendChild(newFavicon);
+    }
+
+    // Wait until page loads
+    window.onload = () => {
+      setTabCloak("Google Docs", "https://ssl.gstatic.com/docs/documents/images/kix-favicon-2023q4.ico");
+    };
+  </script>
+</head>
+<body>
+  <h1>Tab cloak is now active 👀</h1>
+  <p>This tab looks like Google Docs.</p>
+</body>
+</html>
